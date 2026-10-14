@@ -1,4 +1,4 @@
-# Bayaan — Offline Voice Incident Report Assistant
+# Bayaan - An Offline Voice Incident Report Assistant
 
 Bayaan is an Android app built for the Qualcomm QIDK HDK8750 (Snapdragon 8 Elite, SM8750P). It turns a spoken incident description into a structured report, asks follow-up questions for missing details, and saves the reviewed report on the device. After setup, the main flow runs offline.
 
