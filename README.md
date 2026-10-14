@@ -1,23 +1,25 @@
-# m26-qidk
+# Bayaan — Offline Voice Incident Report Assistant
 
-Megathon X 2026 (IIIT Hyderabad), Qualcomm problem statement: **AI Incident Report Assistant**. Voice in, structured incident report out, with every AI model running on-device on the Snapdragon NPU of a QIDK HDK8750 (SM8750P, Snapdragon 8 Elite).
+Bayaan is an Android app built for the Qualcomm QIDK HDK8750 (Snapdragon 8 Elite, SM8750P). It turns a spoken incident description into a structured report, asks follow-up questions for missing details, and saves the reviewed report on the device. After setup, the main flow runs offline.
 
-## Contents
+## Current implementation
 
-| Path | What it is |
-|---|---|
-| `Qualcomm_Problem_Statement_for_MegathonX.pptx` | The official problem-statement deck |
-| `exa-results/qidk-incident-assistant-feasibility-2026-10-10.md` | Feasibility and due-diligence report: QIDK stack, competitors, risks, scorecard, demo strategy |
-| `docs/superpowers/specs/2026-10-10-incident-assistant-design.md` | Design spec (decisions D1–D15) |
-| `docs/superpowers/plans/2026-10-10-incident-assistant-qidk.md` | Task-by-task 24 h implementation plan, test-first, with team split and fallbacks |
-| `.claude/skills/qidk-npu-android/` | Claude Code skill: running models on the QIDK NPU from Android (GenieX, WhisperKit, QNN packaging, known failures) |
-| `.claude/skills/incident-report-prior-art/` | Claude Code skill: prior-art catalog, reusable repos, incident schema, eval datasets |
+- **Speech recognition:** Whisper-Small through sherpa-onnx with QNN on the Hexagon NPU.
+- **Report extraction and follow-up:** Qwen3-4B-Instruct-2507, w4a16, through GenieX 0.3.16 on the NPU.
+- **Grounding and suggestions:** deterministic on-device rules plus suggestion chips that require user acceptance.
+- **Spoken replies:** Android's offline system voice by default. Optional Piper and Supertonic voices run on the CPU and are off by default.
+- **Hindi:** an optional Nemotron ASR lane is experimental; Hindi extraction and speech quality are not broadly validated.
 
-## Stack (planned)
+Model weights and native runtimes are downloaded and staged separately; they are not stored in this repository. The implementation and evaluation have meaningful limits: the 13-report held-out extraction set has already been used, kit-microphone accuracy is not broadly measured, and signal tags are not validated for urgency. See the progress report for results and caveats.
 
-- **STT:** WhisperKit Android with the QNN delegate (NPU)
-- **LLM:** Qualcomm GenieX Android SDK on the NPU, with a GBNF grammar and a native `update_report` tool call
-- **Logic:** deterministic grounding, merge and mandatory-field follow-up in Kotlin
-- **TTS:** Android offline TTS (stretch goal: MeloTTS on the NPU)
+## Build and run
 
-Status: research and plan only, no app code yet.
+See the [submission setup guide](docs/submission/README.md) for device requirements, model/runtime setup, build, install, and offline run instructions. The app is under `app/`; shared report logic and tests are under `core/`.
+
+## Project notes
+
+- [Progress report](docs/progress-report.md) — tried models and approaches, what worked, what failed, and the resulting choices.
+- [Evaluation results](docs/results-tables.md) — detailed scores and comparisons.
+- [Design spec](docs/superpowers/specs/2026-10-10-incident-assistant-design.md) — original product and technical decisions.
+- [Feasibility report](exa-results/qidk-incident-assistant-feasibility-2026-10-10.md) — initial platform research and constraints.
+- [Qualcomm problem statement](Qualcomm_Problem_Statement_for_MegathonX.pptx).
