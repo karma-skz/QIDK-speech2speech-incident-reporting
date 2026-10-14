@@ -18,8 +18,8 @@ See the [submission setup guide](docs/submission/README.md) for device requireme
 
 ## Project notes
 
-- [Progress report](docs/progress-report.md) — tried models and approaches, what worked, what failed, and the resulting choices.
-- [Evaluation results](docs/results-tables.md) — detailed scores and comparisons.
-- [Design spec](docs/superpowers/specs/2026-10-10-incident-assistant-design.md) — original product and technical decisions.
-- [Feasibility report](exa-results/qidk-incident-assistant-feasibility-2026-10-10.md) — initial platform research and constraints.
+- [Progress report](docs/progress-report.md) - tried models and approaches, what worked, what failed, and the resulting choices.
+- [Evaluation results](docs/results-tables.md) - detailed scores and comparisons.
+- [Design spec](docs/superpowers/specs/2026-10-10-incident-assistant-design.md) - original product and technical decisions.
+- [Feasibility report](exa-results/qidk-incident-assistant-feasibility-2026-10-10.md) - initial platform research and constraints.
 - [Qualcomm problem statement](Qualcomm_Problem_Statement_for_MegathonX.pptx).
